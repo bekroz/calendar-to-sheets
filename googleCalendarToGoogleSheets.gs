@@ -23,36 +23,34 @@ headerRange.setValues(header);
 // Day setter
 var today = new Date();
 var fiveDaysForward = new Date(today.getTime() + (5 * 24 * 60 * 60 * 1000));
+var allCalendarOfUser = CalendarApp.getAllCalendars();
 
 // First => Personal Calendar 
 function fetchPersonalCalendar() {
   var personalCalendarID = Session.getActiveUser().getEmail();
   var personalEvents = CalendarApp.getCalendarById(personalCalendarID).getEvents(today, fiveDaysForward);
-Logger.log('Number of events: ' + personalEvents.length);
   var personalCalendar = [[ "Личный календарь", personalEvents[0].getTitle(), personalEvents[1].getTitle(), personalEvents[2].getTitle(), personalEvents[3].getTitle(), personalEvents[4].getTitle()]]
   var firstCalendarRange = sheet.getRange(2,1,1,6);
 firstCalendarRange.setValues(personalCalendar);
-
 }
 
-// Second => Family Calendar
+// Second Calendar
 function fetchFamilyCalendar() {
   // TODO: Create function to Get FamilyCalendarID
-  var familyCalendarID = Session.getActiveUser().getEmail();
-  var familyEvents = CalendarApp.getCalendarById(familyCalendarID).getEvents(today, fiveDaysForward);
-Logger.log('Number of events: ' + familyEvents.length);
-  var personalCalendar = [["Семейный календарь", familyEvents[0].getTitle(), familyEvents[1].getTitle(), familyEvents[2].getTitle(), familyEvents[3].getTitle(), familyEvents[4].getTitle()]]
+  var secondCalendarID = allCalendarOfUser[1];
+  var secondCalendarEvents = CalendarApp.getCalendarById(secondCalendarID).getEvents(today, fiveDaysForward);
+  var personalCalendar = [["Семейный календарь", secondCalendarEvents[0].getTitle(), secondCalendarEvents[1].getTitle(), secondCalendarEvents[2].getTitle(), secondCalendarEvents[3].getTitle(), secondCalendarEvents[4].getTitle()]]
   var secondCalendarRange = sheet.getRange(3,1,1,6);
-secondCalendarRange.setValues(personalCalendar);
-
+secondCalendarRange.setValues(secondCalendar);
 }
 
+// Third Calendar
 function fetchWorkCalendar() {
   // TODO: Create function to Get WorkCalendarID
-  var workCalendarID = Session.getActiveUser().getEmail();
-  var workEvents = CalendarApp.getCalendarById(workCalendarID).getEvents(today, fiveDaysForward);
-Logger.log('Number of events: ' + workEvents.length);
-  var workCalendar = [["Рабочий календарь", workEvents[0].getTitle(), workEvents[1].getTitle(), workEvents[2].getTitle(), workEvents[3].getTitle(), workEvents[4].getTitle()]]
+  
+  var thirdCalendarID = Session.allCalendarOfUser[2];
+  var thirdCalendarEvents = CalendarApp.getCalendarById(thirdCalendarID).thirdCalendarEvents(today, fiveDaysForward);
+  var thirdCalendar = [["Рабочий календарь", workEvents[0].getTitle(), thirdCalendarEvents[1].getTitle(), thirdCalendarEvents[2].getTitle(), thirdCalendarEvents[3].getTitle(), thirdCalendarEvents[4].getTitle()]]
   var thirdCalendarRange = sheet.getRange(4,1,1,6);
-thirdCalendarRange.setValues(workCalendar);
+thirdCalendarRange.setValues(thirdCalendar);
 }
