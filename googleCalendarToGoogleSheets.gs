@@ -26,7 +26,7 @@ var fiveDaysForward = new Date(today.getTime() + (5 * 24 * 60 * 60 * 1000));
 
 // First => Personal Calendar 
 function fetchPersonalCalendar() {
-  var personalCalendarID = "bekrozikoff@gmail.com";
+  var personalCalendarID = Session.getActiveUser().getEmail();
   var personalEvents = CalendarApp.getCalendarById(personalCalendarID).getEvents(today, fiveDaysForward);
 Logger.log('Number of events: ' + personalEvents.length);
   var personalCalendar = [[ "Личный календарь", personalEvents[0].getTitle(), personalEvents[1].getTitle(), personalEvents[2].getTitle(), personalEvents[3].getTitle(), personalEvents[4].getTitle()]]
@@ -37,7 +37,8 @@ firstCalendarRange.setValues(personalCalendar);
 
 // Second => Family Calendar
 function fetchFamilyCalendar() {
-  var familyCalendarID = "bekrozikoff@gmail.com";
+  // TODO: Create function to Get FamilyCalendarID
+  var familyCalendarID = Session.getActiveUser().getEmail();
   var familyEvents = CalendarApp.getCalendarById(familyCalendarID).getEvents(today, fiveDaysForward);
 Logger.log('Number of events: ' + familyEvents.length);
   var personalCalendar = [["Семейный календарь", familyEvents[0].getTitle(), familyEvents[1].getTitle(), familyEvents[2].getTitle(), familyEvents[3].getTitle(), familyEvents[4].getTitle()]]
@@ -47,7 +48,8 @@ secondCalendarRange.setValues(personalCalendar);
 }
 
 function fetchWorkCalendar() {
-  var workCalendarID = "bekrozikoff@gmail.com";
+  // TODO: Create function to Get WorkCalendarID
+  var workCalendarID = Session.getActiveUser().getEmail();
   var workEvents = CalendarApp.getCalendarById(workCalendarID).getEvents(today, fiveDaysForward);
 Logger.log('Number of events: ' + workEvents.length);
   var workCalendar = [["Рабочий календарь", workEvents[0].getTitle(), workEvents[1].getTitle(), workEvents[2].getTitle(), workEvents[3].getTitle(), workEvents[4].getTitle()]]
