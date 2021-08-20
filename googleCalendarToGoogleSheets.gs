@@ -2,37 +2,40 @@
 // DO NOT REMOVE THIRD COMMENT => Needed to get user data for different user
 //@NotOnlyCurrentDoc 
 var ui = SpreadsheetApp.getUi();
-function onOpen() {
+function IonOpen() {
        ui.createMenu('Мероприятия')
-      .addItem('Показать сайдбар', 'showAlert')
+      // .addItem('Показать', 'showAlert')   
+      .addItem('Показать сайдбар', 'showSidebar')
       .addToUi();
 }
 
-// Getting user's approval
-function showAlert() {
-  var result = ui.alert(
-    'Для запуска скрипта необходимо подтвердить получение данных вашего календаря.',
-    'Продолжить?',
-    ui.ButtonSet.YES_NO);
-  
-  // Process the user's response.
-  if (result == ui.Button.YES) {
-    ui.alert('Спасибо. Теперь нажмите кнопку меню, затем боковую панель.')
-    function showSidebar() {
-    var html = HtmlService.createHtmlOutputFromFile('Page')
+function showSidebar() {
+  var html = HtmlService.createHtmlOutputFromFile('showSidebar')
       .setTitle('Календарь пользователя');
       ui.showSidebar(html);
 }
-  } else {
-    ui.alert('Отменено');
-  }
-}
+
+// Getting user's approval
+// function showAlert() {
+//   var result = ui.alert(
+//     'Для запуска скрипта необходимо подтвердить получение данных вашего календаря.',
+//     'Продолжить?',
+//     ui.ButtonSet.YES_NO);
+  
+//   // Process the user's response.
+//   if (result == ui.Button.YES) {
+//     ui.alert('Спасибо. Теперь нажмите кнопку меню, затем боковую панель.')
+//   } else {
+//     ui.alert('Отменено');
+//   }
+// }
 
 // 4th task => Fetch user's all calendar
 // Header
 var sheet = SpreadsheetApp.getActiveSheet();
-var header = [[ "Весь календарь пользователя", "Сегодня", "Завтра", "Через 2 дня", "Через 3 дней",	"Через 4 дня"]]
+var header = [["Весь календарь пользователя", "Сегодня", "Завтра", "Через 2 дня", "Через 3 дней",	"Через 4 дня"]]
 var headerRange = sheet.getRange(1,1,1,6);
+headerRange.setValues(header);
 // Day setter
 var today = new Date();
 var fiveDaysForward = new Date(today.getTime() + (5 * 24 * 60 * 60 * 1000));
