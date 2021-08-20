@@ -2,6 +2,8 @@
 // DO NOT REMOVE THIRD COMMENT => Needed to get user data for different user
 //@NotOnlyCurrentDoc 
 var ui = SpreadsheetApp.getUi();
+// ATTENTION:
+// To Enable IonOpen function to run without crush, create open trigger on app script menu, and add IonOpen to it
 function IonOpen() {
        ui.createMenu('Мероприятия')
       // .addItem('Показать', 'showAlert')   
